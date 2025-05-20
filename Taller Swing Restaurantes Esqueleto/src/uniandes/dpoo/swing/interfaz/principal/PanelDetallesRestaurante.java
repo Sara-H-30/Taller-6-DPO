@@ -41,6 +41,18 @@ public class PanelDetallesRestaurante extends JPanel
 
         // Organiza los elementos en la venta
         // TODO completar el constructor
+    	
+    	setLayout(new GridLayout(3, 1));
+
+        labNombre = new JLabel("Nombre: ");
+        add(labNombre);
+
+        labCalificacion = new JLabel();
+        add(labCalificacion);
+
+        chkVisitado = new JCheckBox("Visitado");
+        chkVisitado.setEnabled(false);
+        add(chkVisitado);
     }
 
     /**
@@ -52,6 +64,9 @@ public class PanelDetallesRestaurante extends JPanel
     private void actualizarRestaurante( String nombre, int calificacion, boolean visitado )
     {
      // TODO completar actualizarRestaurante
+    	 labNombre.setText("Nombre: " + nombre);
+    	 labCalificacion.setIcon(buscarIconoCalificacion(calificacion));
+    	 chkVisitado.setSelected(visitado);
     }
 
     /**
