@@ -60,6 +60,8 @@ public class VentanaPrincipal extends JFrame
 
         // Actualiza los restaurantes que se muestran
         actualizarRestaurantes( );
+        
+        
 
         // Termina de configurar la ventana
         setTitle( "Restaurantes" );
@@ -95,6 +97,7 @@ public class VentanaPrincipal extends JFrame
     	    }
     }
 
+
     /**
      * Agrega un nuevo restaurante al diario y actualiza la información que se muestra
      * @param nombre El nombre del nuevo restaurante
@@ -111,7 +114,6 @@ public class VentanaPrincipal extends JFrame
         mundo.agregarRestaurante(nuevo);
         actualizarRestaurantes();
     }
-
     /**
      * Retorna una lista de los restaurantes.
      * 
@@ -129,7 +131,7 @@ public class VentanaPrincipal extends JFrame
      */
     private void actualizarRestaurantes( )
     {
-        List<Restaurante> todos = this.mundo.getRestaurantes( true );
+    	List<Restaurante> todos = this.mundo.getRestaurantes( true );
         // TODO completar actualizarRestaurantes
         pLista.actualizarRestaurantes(todos);
         if (!todos.isEmpty()) {

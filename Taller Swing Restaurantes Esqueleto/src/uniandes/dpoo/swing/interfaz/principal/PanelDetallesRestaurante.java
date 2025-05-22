@@ -50,9 +50,12 @@ public class PanelDetallesRestaurante extends JPanel
         labCalificacion = new JLabel();
         add(labCalificacion);
 
-        chkVisitado = new JCheckBox("Visitado");
+        JPanel panelVisitado = new JPanel(new FlowLayout(FlowLayout.LEFT)); // Alinea a la izquierda
+        panelVisitado.add(new JLabel("Visitado: "));
+        chkVisitado = new JCheckBox();
         chkVisitado.setEnabled(false);
-        add(chkVisitado);
+        panelVisitado.add(chkVisitado);
+        add(panelVisitado);
     }
 
     /**

@@ -1,12 +1,19 @@
 package uniandes.dpoo.swing.interfaz.agregar;
 
 import java.awt.FlowLayout;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.GridLayout;
+import java.awt.Insets;
 
+import javax.swing.Box;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JSpinner;
 import javax.swing.JTextField;
+import javax.swing.SpinnerListModel;
+import javax.swing.SpinnerNumberModel;
 
 @SuppressWarnings("serial")
 public class PanelEditarRestaurante extends JPanel
@@ -19,12 +26,9 @@ public class PanelEditarRestaurante extends JPanel
     /**
      * Un selector (JComboBox) para que el usuario seleccione la calificación (1 a 5) del restaurante
      */
-    private JComboBox<String> cbbCalificacion;
+    private JSpinner spnCalificacion;
+    private JSpinner spnVisitado;
 
-    /**
-     * Un selector (JComboBox) para que el usuario indique si ya visitó el restaurante o no
-     */
-    private JComboBox<String> cbbVisitado;
 
     public PanelEditarRestaurante( )
     {
@@ -40,44 +44,72 @@ public class PanelEditarRestaurante extends JPanel
         // Agregar todos los elementos al panel
         // TODO completar
     	
-    	
-    	setLayout(new GridLayout(3, 2));
+   
+            setLayout(new GridBagLayout());
+            GridBagConstraints gbc = new GridBagConstraints();
 
-        add(new JLabel("Nombre:"));
-        txtNombre = new JTextField();
-        add(txtNombre);
+            gbc.insets = new Insets(5, 5, 5, 5);
+            gbc.anchor = GridBagConstraints.LINE_START;
 
-        add(new JLabel("Calificación:"));
-        cbbCalificacion = new JComboBox<>();
-        for (int i = 1; i <= 5; i++) {
-            cbbCalificacion.addItem(String.valueOf(i));
+            // --- Fila 1: Nombre ---
+            gbc.gridx = 0;
+            gbc.gridy = 0;
+            gbc.weightx = 0.0;
+            gbc.fill = GridBagConstraints.NONE;
+            add(new JLabel("Nombre:"), gbc);
+
+            gbc.gridx = 1;
+            gbc.weightx = 1.0;
+            txtNombre = new JTextField(15);
+            add(txtNombre, gbc);
+
+            // --- Fila 2: Calificación ---
+            gbc.gridx = 0;
+            gbc.gridy = 1;
+            gbc.weightx = 0.0;
+            add(new JLabel("Calificación:"), gbc);
+
+            gbc.gridx = 1;
+            gbc.weightx = 1.0;
+            spnCalificacion = new JSpinner(new SpinnerNumberModel(1, 1, 5, 1));
+            ((JSpinner.DefaultEditor) spnCalificacion.getEditor()).getTextField().setColumns(2);
+            add(spnCalificacion, gbc);
+
+            // --- Fila 3: Visitado ---
+            gbc.gridx = 0;
+            gbc.gridy = 2;
+            gbc.weightx = 0.0;
+            add(new JLabel("Visitado:"), gbc);
+
+            gbc.gridx = 1;
+            gbc.weightx = 1.0;
+            spnVisitado = new JSpinner(new SpinnerListModel(new String[]{"Sí", "No"}));
+            ((JSpinner.DefaultEditor) spnVisitado.getEditor()).getTextField().setColumns(3);
+            add(spnVisitado, gbc);
+
+            // --- Pegamento vertical para alinear arriba ---
+            gbc.gridx = 0;
+            gbc.gridy = 3;
+            gbc.gridwidth = 2;
+            gbc.weighty = 1.0;
+            gbc.fill = GridBagConstraints.VERTICAL;
+            add(Box.createGlue(), gbc);
         }
-        add(cbbCalificacion);
-
-        add(new JLabel("¿Visitado?"));
-        cbbVisitado = new JComboBox<>(new String[]{"Sí", "No"});
-        add(cbbVisitado);
-
-    }
+    
 
     /**
      * Indica si en el selector se seleccionó la opción que dice que el restaurante fue visitado
      * @return
      */
-    public boolean getVisitado( )
-    {
-    	return cbbVisitado.getSelectedItem().equals("Sí");
-        //return false;
+    public boolean getVisitado() {
+        return "Sí".equals(spnVisitado.getValue());
     }
 
     /**
-     * Indica la calificación marcada en el selector
-     * @return
+     * Retorna la calificación seleccionada en el spinner como entero.
      */
-    public int getCalificacion( )
-    {
-        String calif = ( String )cbbCalificacion.getSelectedItem( );
-        return Integer.parseInt( calif );
+    public int getCalificacion() {
+        return (Integer) spnCalificacion.getValue();
     }
 
     /**

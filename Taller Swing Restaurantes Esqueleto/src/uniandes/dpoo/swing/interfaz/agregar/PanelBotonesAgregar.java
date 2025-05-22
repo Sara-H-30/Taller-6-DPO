@@ -1,5 +1,6 @@
 package uniandes.dpoo.swing.interfaz.agregar;
 
+import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -40,15 +41,27 @@ public class PanelBotonesAgregar extends JPanel implements ActionListener
         // Agrga el boton para cerrar la ventana
         // TODO completar
         
-        butNuevo = new JButton("Crear");
+        butNuevo = new JButton("Crear restaurante");
         butNuevo.setActionCommand(CREAR);
         butNuevo.addActionListener(this);
+        personalizarBoton(butNuevo);
         add(butNuevo);
 
         butCerrar = new JButton("Cerrar");
         butCerrar.setActionCommand(CERRAR);
         butCerrar.addActionListener(this);
+        personalizarBoton(butCerrar);
         add(butCerrar);
+    }
+    
+    private void personalizarBoton(JButton boton)
+    {
+        boton.setBackground(Color.WHITE);                
+        boton.setFocusPainted(false);                   
+        boton.setBorderPainted(false);                  
+        boton.setContentAreaFilled(true);               
+        boton.setOpaque(true);                          
+        boton.setBorder(javax.swing.BorderFactory.createLineBorder(Color.LIGHT_GRAY, 1, false)); 
     }
 
     @Override
