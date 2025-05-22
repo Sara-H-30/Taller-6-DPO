@@ -1,6 +1,8 @@
 package uniandes.dpoo.swing.interfaz.agregar;
 
+import java.awt.Color;
 import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
@@ -8,12 +10,14 @@ import java.awt.Insets;
 
 import javax.swing.Box;
 import javax.swing.JComboBox;
+import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSpinner;
 import javax.swing.JTextField;
 import javax.swing.SpinnerListModel;
 import javax.swing.SpinnerNumberModel;
+import javax.swing.border.EmptyBorder;
 
 @SuppressWarnings("serial")
 public class PanelEditarRestaurante extends JPanel
@@ -96,12 +100,14 @@ public class PanelEditarRestaurante extends JPanel
             add(Box.createGlue(), gbc);
         }
     
+    
 
     /**
      * Indica si en el selector se seleccionó la opción que dice que el restaurante fue visitado
      * @return
      */
     public boolean getVisitado() {
+
         return "Sí".equals(spnVisitado.getValue());
     }
 
